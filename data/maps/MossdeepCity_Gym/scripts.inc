@@ -57,7 +57,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
-	goto_if_unset FLAG_RECEIVED_TM_CALM_MIND, MossdeepCity_Gym_EventScript_GiveCalmMind2
+	goto_if_unset FLAG_RECEIVED_TM_FROM_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_GiveCalmMind2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -66,7 +66,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	message MossdeepCity_Gym_Text_ReceivedMindBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
+	msgbox MossdeepCity_Gym_Text_ExplainTMTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
@@ -97,16 +97,16 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 MossdeepCity_Gym_EventScript_GiveCalmMind2::
 	giveitem ITEM_TM_CALM_MIND
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_CALM_MIND
+	msgbox MossdeepCity_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_MOSSDEEP_GYM
 	release
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind::
 	giveitem ITEM_TM_CALM_MIND
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_CALM_MIND
+	msgbox MossdeepCity_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_MOSSDEEP_GYM
 	return
 
 MossdeepCity_Gym_EventScript_TateAndLizaRematch::
@@ -574,14 +574,14 @@ MossdeepCity_Gym_Text_ReceivedMindBadge:
 	.string "{PLAYER} received the MIND BADGE\n"
 	.string "from TATE and LIZA.$"
 
-MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
+MossdeepCity_Gym_Text_ExplainTMTakeThis:
 	.string "TATE: The MIND BADGE enhances the\n"
 	.string "SP. ATK and SP. DEF of POKéMON.\p"
 	.string "LIZA: It also lets you use the HM move\n"
 	.string "DIVE outside of battle.\p"
 	.string "TATE: You should also take this, too.$"
 
-MossdeepCity_Gym_Text_ExplainCalmMind:
+MossdeepCity_Gym_Text_ExplainTM:
 	.string "TATE: That TM04 contains…\n"
 	.string "LIZA: CALM MIND!\p"
 	.string "TATE: It raises SP. ATK and…\n"

@@ -52,7 +52,7 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
-	goto_if_unset FLAG_RECEIVED_TM_OVERHEAT, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
+	goto_if_unset FLAG_RECEIVED_TM_FROM_LAVARIDGE_GYM, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -61,7 +61,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainTMTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
@@ -86,16 +86,16 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	giveitem ITEM_TM_OVERHEAT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_OVERHEAT
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_LAVARIDGE_GYM
 	release
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
 	giveitem ITEM_TM_OVERHEAT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_OVERHEAT
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_LAVARIDGE_GYM
 	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
@@ -334,7 +334,7 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 	.string "{PLAYER} received the HEAT BADGE\n"
 	.string "from FLANNERY.$"
 
-LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
+LavaridgeTown_Gym_1F_Text_ExplainTMTakeThis:
 	.string "If you have a HEAT BADGE, all POKéMON\n"
 	.string "up to Level 50, even those you get in\l"
 	.string "trades from other people, will obey\l"
@@ -344,7 +344,7 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "This is a token of my appreciation.\n"
 	.string "Don't be shy about taking it!$"
 
-LavaridgeTown_Gym_1F_Text_ExplainOverheat:
+LavaridgeTown_Gym_1F_Text_ExplainTM:
 	.string "That TM50 contains OVERHEAT.\p"
 	.string "That move inflicts serious damage on\n"
 	.string "the opponent.\p"

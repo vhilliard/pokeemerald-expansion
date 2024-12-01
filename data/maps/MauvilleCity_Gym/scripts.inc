@@ -77,7 +77,7 @@ MauvilleCity_Gym_EventScript_Wattson::
 	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
-	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave2
+	goto_if_unset FLAG_RECEIVED_TM_FROM_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_GiveShockWave2
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
@@ -87,7 +87,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
+	msgbox MauvilleCity_Gym_Text_ExplainTMTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
@@ -112,18 +112,18 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave2::
-	giveitem ITEM_TM_SHOCK_WAVE
+	giveitem ITEM_TM_VOLT_SWITCH
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+	msgbox MauvilleCity_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_MAUVILLE_GYM
 	release
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave::
-	giveitem ITEM_TM_SHOCK_WAVE
+	giveitem ITEM_TM_VOLT_SWITCH
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+	msgbox MauvilleCity_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_MAUVILLE_GYM
 	return
 
 MauvilleCity_Gym_EventScript_CompletedNewMauville::
@@ -355,7 +355,7 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 	.string "{PLAYER} received the DYNAMO BADGE\n"
 	.string "from WATTSON.$"
 
-MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
+MauvilleCity_Gym_Text_ExplainTMTakeThis:
 	.string "With the DYNAMO BADGE, POKéMON can\n"
 	.string "use ROCK SMASH out of battle.\p"
 	.string "And, it will make your POKéMON a little\n"
@@ -363,7 +363,7 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
 
-MauvilleCity_Gym_Text_ExplainShockWave:
+MauvilleCity_Gym_Text_ExplainTM:
 	.string "That TM34 there contains SHOCK WAVE.\p"
 	.string "It's a trustworthy move that never\n"
 	.string "misses! You can count on it!\p"

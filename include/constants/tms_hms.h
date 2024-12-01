@@ -2,66 +2,276 @@
 #define GUARD_CONSTANTS_TMS_HMS_H
 
 #define FOREACH_TM(F) \
-    F(FOCUS_PUNCH) \
-    F(DRAGON_CLAW) \
-    F(WATER_PULSE) \
-    F(CALM_MIND) \
-    F(ROAR) \
-    F(TOXIC) \
-    F(HAIL) \
-    F(BULK_UP) \
-    F(BULLET_SEED) \
-    F(HIDDEN_POWER) \
-    F(SUNNY_DAY) \
-    F(TAUNT) \
-    F(ICE_BEAM) \
-    F(BLIZZARD) \
-    F(HYPER_BEAM) \
-    F(LIGHT_SCREEN) \
-    F(PROTECT) \
-    F(RAIN_DANCE) \
-    F(GIGA_DRAIN) \
-    F(SAFEGUARD) \
-    F(FRUSTRATION) \
-    F(SOLAR_BEAM) \
-    F(IRON_TAIL) \
-    F(THUNDERBOLT) \
-    F(THUNDER) \
-    F(EARTHQUAKE) \
-    F(RETURN) \
-    F(DIG) \
-    F(PSYCHIC) \
-    F(SHADOW_BALL) \
-    F(BRICK_BREAK) \
-    F(DOUBLE_TEAM) \
-    F(REFLECT) \
-    F(SHOCK_WAVE) \
-    F(FLAMETHROWER) \
-    F(SLUDGE_BOMB) \
-    F(SANDSTORM) \
-    F(FIRE_BLAST) \
-    F(ROCK_TOMB) \
-    F(AERIAL_ACE) \
-    F(TORMENT) \
-    F(FACADE) \
-    F(SECRET_POWER) \
-    F(REST) \
-    F(ATTRACT) \
-    F(THIEF) \
-    F(STEEL_WING) \
-    F(SKILL_SWAP) \
-    F(SNATCH) \
-    F(OVERHEAT)
+    /* 001 */F(FOCUS_PUNCH) \
+    /* 002 */F(DRAGON_CLAW) \
+    /* 003 */F(WATER_PULSE) \
+    /* 004 */F(CALM_MIND) \
+    /* 005 */F(ROAR) \
+    /* 006 */F(TOXIC) \
+    /* 007 */F(HAIL) \
+    /* 008 */F(BULK_UP) \
+    /* 009 */F(BULLET_SEED) \
+    /* 010 */F(HIDDEN_POWER) \
+    /* 011 */F(SUNNY_DAY) \
+    /* 012 */F(TAUNT) \
+    /* 013 */F(ICE_BEAM) \
+    /* 014 */F(BLIZZARD) \
+    /* 015 */F(HYPER_BEAM) \
+    /* 016 */F(LIGHT_SCREEN) \
+    /* 017 */F(PROTECT) \
+    /* 018 */F(RAIN_DANCE) \
+    /* 019 */F(GIGA_DRAIN) \
+    /* 020 */F(SAFEGUARD) \
+    /* 021 */F(FRUSTRATION) \
+    /* 022 */F(SOLAR_BEAM) \
+    /* 023 */F(IRON_TAIL) \
+    /* 024 */F(THUNDERBOLT) \
+    /* 025 */F(THUNDER) \
+    /* 026 */F(EARTHQUAKE) \
+    /* 027 */F(RETURN) \
+    /* 028 */F(DIG) \
+    /* 029 */F(PSYCHIC) \
+    /* 030 */F(SHADOW_BALL) \
+    /* 031 */F(BRICK_BREAK) \
+    /* 032 */F(DOUBLE_TEAM) \
+    /* 033 */F(REFLECT) \
+    /* 034 */F(SHOCK_WAVE) \
+    /* 035 */F(FLAMETHROWER) \
+    /* 036 */F(SLUDGE_BOMB) \
+    /* 037 */F(SANDSTORM) \
+    /* 038 */F(FIRE_BLAST) \
+    /* 039 */F(ROCK_TOMB) \
+    /* 040 */F(AERIAL_ACE) \
+    /* 041 */F(TORMENT) \
+    /* 042 */F(FACADE) \
+    /* 043 */F(SECRET_POWER) \
+    /* 044 */F(REST) \
+    /* 045 */F(ATTRACT) \
+    /* 046 */F(THIEF) \
+    /* 047 */F(STEEL_WING) \
+    /* 048 */F(SKILL_SWAP) \
+    /* 049 */F(SNATCH) \
+    /* 050 */F(OVERHEAT) \
+/* Pad out ORAS move list */ \
+    /* 051 */F(HONE_CLAWS) \
+    /* 052 */F(PSYSHOCK) \
+    /* 053 */F(VENOSHOCK) \
+    /* 054 */F(ROOST) \
+    /* 055 */F(SMACK_DOWN) \
+    /* 056 */F(SLUDGE_WAVE) \
+    /* 057 */F(FLAME_CHARGE) \
+    /* 058 */F(LOW_SWEEP) \
+    /* 059 */F(ROUND) \
+    /* 060 */F(ECHOED_VOICE) \
+    /* 061 */F(FOCUS_BLAST) \
+    /* 062 */F(ENERGY_BALL) \
+    /* 063 */F(FALSE_SWIPE) \
+    /* 064 */F(SCALD) \
+    /* 065 */F(FLING) \
+    /* 066 */F(CHARGE_BEAM) \
+    /* 067 */F(SKY_DROP) \
+    /* 068 */F(INCINERATE) \
+    /* 069 */F(QUASH) \
+    /* 070 */F(WILL_O_WISP) \
+    /* 071 */F(ACROBATICS) \
+    /* 072 */F(EMBARGO) \
+    /* 073 */F(EXPLOSION) \
+    /* 074 */F(SHADOW_CLAW) \
+    /* 075 */F(PAYBACK) \
+    /* 076 */F(RETALIATE) \
+    /* 077 */F(GIGA_IMPACT) \
+    /* 078 */F(ROCK_POLISH) \
+    /* 079 */F(STONE_EDGE) \
+    /* 070 */F(VOLT_SWITCH) \
+    /* 081 */F(THUNDER_WAVE) \
+    /* 082 */F(GYRO_BALL) \
+    /* 083 */F(SWORDS_DANCE) \
+    /* 084 */F(STRUGGLE_BUG) \
+    /* 085 */F(PSYCH_UP) \
+    /* 086 */F(BULLDOZE) \
+    /* 087 */F(FROST_BREATH) \
+    /* 088 */F(ROCK_SLIDE) \
+    /* 089 */F(X_SCISSOR) \
+    /* 090 */F(DRAGON_TAIL) \
+    /* 091 */F(INFESTATION) \
+    /* 092 */F(POISON_JAB) \
+    /* 093 */F(DREAM_EATER) \
+    /* 094 */F(GRASS_KNOT) \
+    /* 095 */F(SWAGGER) \
+    /* 096 */F(SLEEP_TALK) \
+    /* 097 */F(U_TURN) \
+    /* 098 */F(SUBSTITUTE) \
+    /* 099 */F(FLASH_CANNON) \
+    /* 100 */F(TRICK_ROOM) \
+    /* 101 */F(WILD_CHARGE) \
+    /* 102 */F(SNARL) \
+    /* 103 */F(NATURE_POWER) \
+    /* 104 */F(DARK_PULSE) \
+    /* 105 */F(POWER_UP_PUNCH) \
+    /* 106 */F(DAZZLING_GLEAM) \
+    /* 107 */F(CONFIDE) \
+/* Expansion TMs Scarlet Violet */ \
+    /* 108 */F(TAKE_DOWN) \
+    /* 109 */F(CHARM) \
+    /* 110 */F(FAKE_TEARS) \
+    /* 111 */F(AGILITY) \
+    /* 112 */F(MUD_SLAP) \
+    /* 113 */F(SCARY_FACE) \
+    /* 114 */F(FIRE_FANG) \
+    /* 115 */F(THUNDER_FANG) \
+    /* 116 */F(ICE_FANG) \
+    /* 117 */F(LOW_KICK) \
+    /* 118 */F(ACID_SPRAY) \
+    /* 119 */F(PSYBEAM) \
+    /* 120 */F(CONFUSE_RAY) \
+    /* 121 */F(DISARMING_VOICE) \
+    /* 122 */F(TRAILBLAZE) \
+    /* 123 */F(POUNCE) \
+    /* 124 */F(CHILLING_WATER) \
+    /* 125 */F(FIRE_SPIN) \
+    /* 126 */F(POISON_TAIL) \
+    /* 127 */F(HEX) \
+    /* 128 */F(METAL_CLAW) \
+    /* 129 */F(SWIFT) \
+    /* 130 */F(MAGICAL_LEAF) \
+    /* 131 */F(ICY_WIND) \
+    /* 132 */F(MUD_SHOT) \
+    /* 133 */F(DRAINING_KISS) \
+    /* 134 */F(AIR_CUTTER) \
+    /* 135 */F(STORED_POWER) \
+    /* 136 */F(NIGHT_SHADE) \
+    /* 137 */F(AVALANCHE) \
+    /* 138 */F(ENDURE) \
+    /* 139 */F(SNOWSCAPE) \
+    /* 140 */F(SMART_STRIKE) \
+    /* 141 */F(ZEN_HEADBUTT) \
+    /* 142 */F(FOUL_PLAY) \
+    /* 143 */F(PSYCHIC_FANGS) \
+    /* 144 */F(AIR_SLASH) \
+    /* 145 */F(BODY_SLAM) \
+    /* 146 */F(FIRE_PUNCH) \
+    /* 147 */F(THUNDER_PUNCH) \
+    /* 148 */F(ICE_PUNCH) \
+    /* 149 */F(SEED_BOMB) \
+    /* 140 */F(ELECTRO_BALL) \
+    /* 151 */F(DRAIN_PUNCH) \
+    /* 152 */F(ROCK_BLAST) \
+    /* 153 */F(METRONOME) \
+    /* 154 */F(STOMPING_TANTRUM) \
+    /* 155 */F(BODY_PRESS) \
+    /* 156 */F(SPIKES) \
+    /* 157 */F(TOXIC_SPIKES) \
+    /* 158 */F(IMPRISON) \
+    /* 159 */F(LEECH_LIFE) \
+    /* 160 */F(EERIE_IMPULSE) \
+    /* 161 */F(IRON_HEAD) \
+    /* 162 */F(DRAGON_DANCE) \
+    /* 163 */F(POWER_GEM) \
+    /* 164 */F(GUNK_SHOT) \
+    /* 165 */F(IRON_DEFENCE) \
+    /* 166 */F(DRILL_RUN) \
+    /* 167 */F(CRUNCH) \
+    /* 168 */F(TRICK) \
+    /* 169 */F(LIQUIDATION) \
+    /* 170 */F(AURA_SPHERE) \
+    /* 171 */F(TAILWIND) \
+    /* 172 */F(STEALTH_ROCK) \
+    /* 173 */F(HYPER_VOICE) \
+    /* 174 */F(HEAT_WAVE) \
+    /* 175 */F(HEAVY_SLAM) \
+    /* 176 */F(ICE_SPINNER) \
+    /* 177 */F(PLAY_ROUGH) \
+    /* 178 */F(AMNESIA) \
+    /* 179 */F(HELPING_HAND) \
+    /* 180 */F(POLLEN_PUFF) \
+    /* 181 */F(BATON_PASS) \
+    /* 182 */F(EARTH_POWER) \
+    /* 183 */F(REVERSAL) \
+    /* 184 */F(ELECTRIC_TERRAIN) \
+    /* 185 */F(GRASSY_TERRAIN) \
+    /* 186 */F(PSYCHIC_TERRAIN) \
+    /* 187 */F(MISTY_TERRAIN) \
+    /* 188 */F(NASTY_PLOT) \
+    /* 189 */F(HYDRO_PUMP) \
+    /* F(FIRE_PLEDGE) \ */ \
+    /* F(WATER_PLEDGE) \ */ \
+    /* F(GRASS_PLEDGE) \ */ \
+    /* F(BLAST_BURN) \ */ \
+    /* F(HYDRO_CANNON) \ */ \
+    /* F(FRENZY_PLANT) \ */ \
+    /* 190 */F(PHANTOM_FORCE) \
+    /* 191 */F(OUTRAGE) \
+    /* 192 */F(LEAF_STORM) \
+    /* 193 */F(HURRICANE) \
+    /* 194 */F(BUG_BUZZ) \
+    /* 195 */F(BRAVE_BIRD) \
+    /* 196 */F(FLARE_BLITZ) \
+    /* 197 */F(CLOSE_COMBAT) \
+    /* 198 */F(DRACO_METEOR) \
+    /* 199 */F(STEEL_BEAM) \
+    /* 200 */F(TERA_BLAST) \
+/* Expansion TMs Teal Mask */ \
+    /* 201 */F(CHARGE) \
+    /* 202 */F(HAZE) \
+    /* 203 */F(SAND_TOMB) \
+    /* 204 */F(SPITE) \
+    /* 205 */F(GRAVITY) \
+    /* 206 */F(KNOCK_OFF) \
+    /* 207 */F(BIG_BITE) \
+    /* 208 */F(SUPER_FANG) \
+    /* 209 */F(VACUUM_WAVE) \
+    /* 210 */F(LUNGE) \
+    /* 211 */F(HIGH_HORSEPOWER) \
+    /* 212 */F(ICICLE_SPEAR) \
+    /* 213 */F(HEAT_CRASH) \
+    /* 214 */F(SOLAR_BLADE) \
+    /* 215 */F(UPROAR) \
+    /* 216 */F(WEATHER_BALL) \
+    /* 217 */F(GRASSY_GLIDE) \
+    /* 218 */F(BURNING_JEALOUSY) \
+    /* 219 */F(FLIP_TURN) \
+    /* 220 */F(DUAL_WINGBEAT) \
+    /* 221 */F(POLTERGEIST) \
+    /* 222 */F(LASH_OUT) \
+    /* 223 */F(SCALE_SHOT) \
+    /* 224 */F(MISTY_EXPLOSION) \
+/* Expansion TMs Indigo Disc */ \
+    /* 225 */F(PAIN_SPLIT) \
+    /* 226 */F(DOUBLE_EDGE) \
+    /* 227 */F(ENDEAVOR) \
+    /* 228 */F(PETAL_BLIZZARD) \
+    /* 229 */F(TEMPER_FLARE) \
+    /* 230 */F(WHIRLPOOL) \
+    /* 231 */F(MUDDY_WATER) \
+    /* 232 */F(SUPERCELL_SLAM) \
+    /* 233 */F(ELECTROWEB) \
+    /* 234 */F(TRIPLE_AXEL) \
+    /* 235 */F(COACHING) \
+    /* 236 */F(SCORCHING_SANDS) \
+    /* 237 */F(FEATHER_DANCE) \
+    /* 238 */F(FUTURE_SIGHT) \
+    /* 239 */F(EXPANDING_FORCE) \
+    /* 240 */F(SKITTER_SMACK) \
+    /* 241 */F(METEOR_BEAM) \
+    /* 242 */F(THROAT_CHOP) \
+    /* 243 */F(BREAKING_SWIPE) \
+    /* 244 */F(METAL_SOUND) \
+    /* 245 */F(CURSE) \
+    /* 246 */F(HARD_PRESS) \
+    /* 247 */F(DRAGON_CHEER) \
+    /* 248 */F(ALLURING_VOICE) \
+    /* 249 */F(PSYCHIC_NOISE) \
+    /* 250 */F(UPPER_HAND)
 
 #define FOREACH_HM(F) \
-    F(CUT) \
-    F(FLY) \
-    F(SURF) \
-    F(STRENGTH) \
-    F(FLASH) \
-    F(ROCK_SMASH) \
-    F(WATERFALL) \
-    F(DIVE)
+    /* 1 */F(CUT) \
+    /* 2 */F(FLY) \
+    /* 3 */F(SURF) \
+    /* 4 */F(STRENGTH) \
+    /* 5 */F(FLASH) \
+    /* 6 */F(ROCK_SMASH) \
+    /* 7 */F(WATERFALL) \
+    /* 8 */F(DIVE)
 
 #define FOREACH_TMHM(F) \
     FOREACH_TM(F) \
