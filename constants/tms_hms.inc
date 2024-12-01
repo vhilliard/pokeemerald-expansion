@@ -11,6 +11,7 @@
 * enum ITEM_HM_CUT
 * ... */
 #define EQUIV_TM(id) enum ITEM_TM_ ## id;
+#define EQUIV_TR(id) enum ITEM_TR_ ## id;
 #define EQUIV_HM(id) enum ITEM_HM_ ## id;
 	enum_start ITEM_TM01
 FOREACH_TM(EQUIV_TM)

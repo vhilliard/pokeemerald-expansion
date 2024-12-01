@@ -14093,4 +14093,91 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    //
+    // Expansion Items
+    //
+    [ITEM_TM101] =
+    {
+        .name = _("TM101"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM102] =
+    {
+        .name = _("TM102"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM103] =
+    {
+        .name = _("TM103"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM104] =
+    {
+        .name = _("TM104"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM105] =
+    {
+        .name = _("TM105"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM106] =
+    {
+        .name = _("TM106"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
+
+    [ITEM_TM107] =
+    {
+        .name = _("TM107"),
+        .price = 3000,
+        .description = sQuestionMarksDesc, // Todo
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_NONE, // Todo
+    },
 };

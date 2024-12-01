@@ -136,7 +136,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
-	goto_if_unset FLAG_RECEIVED_TM_BULK_UP, DewfordTown_Gym_EventScript_GiveBulkUp2
+	goto_if_unset FLAG_RECEIVED_TM_FROM_DEWFORD_GYM, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -170,15 +170,15 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 DewfordTown_Gym_EventScript_GiveBulkUp::
 	giveitem ITEM_TM_BULK_UP
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_DEWFORD_GYM
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2:
 	giveitem ITEM_TM_BULK_UP
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_DEWFORD_GYM
 	release
 	end
 
@@ -408,7 +408,7 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
 	.string "If you'd like, use this TECHNICAL\n"
 	.string "MACHINE, too.$"
 
-DewfordTown_Gym_Text_ExplainBulkUp:
+DewfordTown_Gym_Text_ExplainTM:
 	.string "That TM08 contains BULK UP.\p"
 	.string "It's a move that raises both ATTACK\n"
 	.string "and DEFENSE stats.\p"

@@ -332,7 +332,7 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast::
 PetalburgCity_Gym_EventScript_NormanPostBattle::
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GiveEnigmaBerry
-	goto_if_unset FLAG_RECEIVED_TM_FACADE, PetalburgCity_Gym_EventScript_GiveFacade2
+	goto_if_unset FLAG_RECEIVED_TM_FROM_PETALBURG_GYM, PetalburgCity_Gym_EventScript_GiveFacade2
 	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
 	msgbox PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT
 	release
@@ -377,7 +377,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT
+	msgbox PetalburgCity_Gym_Text_ExplainTMTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
@@ -405,10 +405,10 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade::
-	giveitem ITEM_TM_FACADE
+	giveitem ITEM_TM_RETALIATE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	setflag FLAG_RECEIVED_TM_FACADE
-	msgbox PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FROM_PETALBURG_GYM
+	msgbox PetalburgCity_Gym_Text_ExplainTM, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_Gym_EventScript_WallysDadArrivesNorth::
@@ -1282,7 +1282,7 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "{PLAYER} received the BALANCE BADGE\n"
 	.string "from DAD!$"
 
-PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
+PetalburgCity_Gym_Text_ExplainTMTakeThis:
 	.string "DAD: With that BADGE, the DEFENSE\n"
 	.string "of all your POKéMON will increase.\p"
 	.string "POKéMON that know the HM move SURF\n"
@@ -1290,7 +1290,7 @@ PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
 
-PetalburgCity_Gym_Text_ExplainFacade:
+PetalburgCity_Gym_Text_ExplainTM:
 	.string "DAD: TM42 contains FACADE.\p"
 	.string "It doubles the power of moves if\n"
 	.string "the POKéMON is poisoned, paralyzed,\l"
