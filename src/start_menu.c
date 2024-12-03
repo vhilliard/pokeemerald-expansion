@@ -627,16 +627,20 @@ static bool8 HandleStartMenuInput(void)
 
     if (JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
+            PlaySE(SE_SELECT);
             if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
                 return FALSE;
         }
         if (sCurrentStartMenuActions[sStartMenuCursorPos] == MENU_ACTION_DEXNAV
           && MapHasNoEncounterData())
+        {
+            PlaySE(SE_FAILURE);
             return FALSE;
+        }
         
+        PlaySE(SE_SELECT);
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
         if (gMenuCallback != StartMenuSaveCallback
