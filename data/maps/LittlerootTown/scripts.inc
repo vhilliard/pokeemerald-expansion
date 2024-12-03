@@ -483,6 +483,8 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomApproachPlayerMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomApproachPlayerFemale
 	call LittlerootTown_EventScript_GiveRunningShoes
+	call LittlerootTown_EventScript_GiveDexNav
+	call LittlerootTown_EventScript_ComeHome
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomReturnHomeMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
@@ -878,6 +880,8 @@ LittlerootTown_EventScript_Mom::
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
 	call LittlerootTown_EventScript_GiveRunningShoes
+	call LittlerootTown_EventScript_GiveDexNav
+	call LittlerootTown_EventScript_ComeHome
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
@@ -904,6 +908,22 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	waitfanfare
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	return
+
+LittlerootTown_EventScript_GiveDexNav::
+	msgbox LittlerootTown_Text_TakeThisDexNav, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_Text_InstallDexNav
+	waitfanfare
+	setflag FLAG_SYS_DEXNAV_GET
+	msgbox LittlerootTown_Text_ExplainDexNav, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	return
+
+LittlerootTown_EventScript_ComeHome::
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -946,6 +966,21 @@ LittlerootTown_Text_ExplainRunningShoes:
 	.string "RUNNING SHOES to run extra-fast!\p"
 	.string "“Slip on these RUNNING SHOES and race\n"
 	.string "in the great outdoors!”$"
+
+LittlerootTown_Text_TakeThisDexNav:
+	.string "MOM: This also came for you, {PLAYER}.\p"
+	.string "It's the new DEXNAV from DEVON CORP.\n"
+	.string "Here, let me install it for you...$" 
+
+LittlerootTown_Text_InstallDexNav:
+	.string "MOM installed {PLAYER}'s DEXNAV.$"
+
+LittlerootTown_Text_ExplainDexNav:
+	.string "It says here that the DEXNAV lets you\n"
+	.string "find POKéMON you have seen before.\p"
+	.string "Perhaps someone at DEVON CORP in\n"
+	.string "RUSTBORO CITY would be able to\p"
+	.string "tell you more about it.$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"
