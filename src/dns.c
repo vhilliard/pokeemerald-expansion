@@ -26,12 +26,12 @@
 /* Timelapses */
 enum
 {
-    TIME_MIDNIGHT,
-    TIME_DAWN,
-    TIME_DAY,
-    TIME_SUNSET,
-    TIME_NIGHTFALL,
-    TIME_NIGHT
+    DN_TIME_MIDNIGHT,
+    DN_TIME_DAWN,
+    DN_TIME_DAY,
+    DN_TIME_SUNSET,
+    DN_TIME_NIGHTFALL,
+    DN_TIME_NIGHT
 };
 
 /* End hours for each of the timelapses */
@@ -459,25 +459,25 @@ static u16 GetDNSFilter()
 
     switch(GetDnsTimeLapse(hour))
     {
-        case TIME_MIDNIGHT:
+        case DN_TIME_MIDNIGHT:
             if (hour < 1)
                 return gMidnightFilters[minutes >> 3];            
             else
                 return gMidnightFilters[7];
 
-        case TIME_DAWN:
+        case DN_TIME_DAWN:
             return gDawnFilters[minutes >> 1];
 
-        case TIME_DAY:
+        case DN_TIME_DAY:
             return gDayFilter;
 
-        case TIME_SUNSET: 
+        case DN_TIME_SUNSET: 
             return gSunsetFilters[minutes >> 1];
 
-        case TIME_NIGHTFALL:
+        case DN_TIME_NIGHTFALL:
             return gNightfallFilters[minutes >> 1];
 
-        case TIME_NIGHT:
+        case DN_TIME_NIGHT:
             return gNightFilter;
     }
 
@@ -508,17 +508,17 @@ static void DoDnsLightning()
 u8 GetDnsTimeLapse(u8 hour)
 {
     if (hour < MIDNIGHT_END_HOUR)
-        return TIME_MIDNIGHT;
+        return DN_TIME_MIDNIGHT;
     else if (hour < DAWN_END_HOUR)
-        return TIME_DAWN;
+        return DN_TIME_DAWN;
     else if (hour < DAY_END_HOUR)
-        return TIME_DAY;
+        return DN_TIME_DAY;
     else if (hour < SUNSET_END_HOUR)
-        return TIME_SUNSET;
+        return DN_TIME_SUNSET;
     else if (hour < NIGHTFALL_END_HOUR)
-        return TIME_NIGHTFALL;
+        return DN_TIME_NIGHTFALL;
     else 
-        return TIME_NIGHT;
+        return DN_TIME_NIGHT;
 }
 
 //Checks if current map is affected by dns
