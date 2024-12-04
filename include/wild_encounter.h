@@ -2,6 +2,7 @@
 #define GUARD_WILD_ENCOUNTER_H
 
 #include "constants/wild_encounter.h"
+#include "config/wild_encounter_times.h"
 
 struct WildPokemon
 {
@@ -25,6 +26,21 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *rockSmashMonsInfo;
     const struct WildPokemonInfo *hiddenMonsInfo;
     const struct WildPokemonInfo *fishingMonsInfo;
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+    const struct WildPokemonInfo *landMonsDayInfo;
+    const struct WildPokemonInfo *landMonsNiteInfo;
+    const struct WildPokemonInfo *landMonsMornInfo;
+    const struct WildPokemonInfo *landMonsEvenInfo;
+    const struct WildPokemonInfo *waterMonsDayInfo;
+    const struct WildPokemonInfo *waterMonsNiteInfo;
+    const struct WildPokemonInfo *waterMonsMornInfo;
+    const struct WildPokemonInfo *waterMonsEvenInfo;
+    const struct WildPokemonInfo *rockSmashMonsDayInfo;
+    const struct WildPokemonInfo *rockSmashMonsNiteInfo;
+    const struct WildPokemonInfo *rockSmashMonsMornInfo;
+    const struct WildPokemonInfo *rockSmashMonsEvenInfo;
+#endif
 };
 
 extern const struct WildPokemonHeader gWildMonHeaders[];

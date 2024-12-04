@@ -23,6 +23,8 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
+#include "rtc.h"
+#include "wild_encounter_times.h"
 
 extern const u8 EventScript_SprayWoreOff[];
 
@@ -463,6 +465,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 {
     u8 wildMonIndex = 0;
     u8 level;
+    u16 headerId;
 
     switch (area)
     {
@@ -503,13 +506,84 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
         break;
     }
 
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+    const struct WildPokemonInfo *dn_wildMonInfo;
+    u8 time;
+
+    time = GetTimeOfDay();
+    headerId = GetCurrentMapWildMonHeaderId();
+
+    if(area == WILD_AREA_LAND)
+    {
+        if (time == TIME_DAY && gWildMonHeaders[headerId].landMonsDayInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].landMonsDayInfo;
+        else if (time == TIME_NIGHT && gWildMonHeaders[headerId].landMonsNiteInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].landMonsNiteInfo;
+        else if (time == TIME_MORNING && gWildMonHeaders[headerId].landMonsMornInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].landMonsMornInfo;
+        else if (time == TIME_EVENING && gWildMonHeaders[headerId].landMonsEvenInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].landMonsEvenInfo;
+        else
+            dn_wildMonInfo = wildMonInfo;
+    } 
+    else if (area == WILD_AREA_WATER)
+    {
+        if (time == TIME_DAY && gWildMonHeaders[headerId].waterMonsDayInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].waterMonsDayInfo;
+        else if (time == TIME_NIGHT && gWildMonHeaders[headerId].waterMonsNiteInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].waterMonsNiteInfo;
+        else if (time == TIME_MORNING && gWildMonHeaders[headerId].waterMonsMornInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].waterMonsMornInfo;
+        else if (time == TIME_EVENING && gWildMonHeaders[headerId].waterMonsEvenInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].waterMonsEvenInfo;
+        else
+            dn_wildMonInfo = wildMonInfo;
+    }
+    else if (area == WILD_AREA_ROCKS)
+    {
+        if (time == TIME_DAY && gWildMonHeaders[headerId].rockSmashMonsDayInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].rockSmashMonsDayInfo;
+        else if (time == TIME_NIGHT && gWildMonHeaders[headerId].rockSmashMonsNiteInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].rockSmashMonsNiteInfo;
+        else if (time == TIME_MORNING && gWildMonHeaders[headerId].rockSmashMonsMornInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].rockSmashMonsMornInfo;
+        else if (time == TIME_EVENING && gWildMonHeaders[headerId].rockSmashMonsEvenInfo != NULL)
+            dn_wildMonInfo = gWildMonHeaders[headerId].rockSmashMonsEvenInfo;
+        else
+            dn_wildMonInfo = wildMonInfo;
+    }
+    else
+        dn_wildMonInfo = wildMonInfo;
+
+    u16 dn_species;
+
+    dn_species = dn_wildMonInfo->wildPokemon[wildMonIndex].species;
+    
+    if(dn_species != SPECIES_NONE)
+        level = ChooseWildMonLevel(dn_wildMonInfo->wildPokemon, wildMonIndex, area);
+    else
+        level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
+
+    if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
+        return FALSE;
+    if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
+        return FALSE;
+
+    if(dn_species != SPECIES_NONE)
+        CreateWildMon(dn_species, level);
+    else
+        CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+#else
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
+    
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
     CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+#endif
+
     return TRUE;
 }
 

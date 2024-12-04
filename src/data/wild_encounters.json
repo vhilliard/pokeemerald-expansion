@@ -22,6 +22,74 @@
           ]
         },
         {
+          "type": "land_mons_day",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "land_mons_night",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "land_mons_morning",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "land_mons_evening",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
           "type": "water_mons",
           "encounter_rates": [
             60,
@@ -32,6 +100,46 @@
           ]
         },
         {
+          "type": "water_mons_day",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "water_mons_night",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "water_mons_morning",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "water_mons_evening",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
           "type": "rock_smash_mons",
           "encounter_rates": [
             60,
@@ -39,6 +147,46 @@
             5,
             4,
             1
+          ]
+        },
+        {
+          "type": "rock_smash_mons_day",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "rock_smash_mons_night",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "rock_smash_mons_morning",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "rock_smash_mons_evening",
+          "encounter_rates": [
+            0,
+            0,
+            0,
+            0,
+            0
           ]
         },
         {
@@ -149,6 +297,266 @@
                 "min_level": 3,
                 "max_level": 3,
                 "species": "SPECIES_ZIGZAGOON"
+              }
+            ]
+          },
+          "land_mons_day": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 9,
+                "species": "SPECIES_LYCANROC_MIDDAY"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_night": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 9,
+                "species": "SPECIES_LYCANROC_MIDNIGHT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_morning": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 9,
+                "species": "SPECIES_LYCANROC_DUSK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_evening": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_LYCANROC_DUSK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
               }
             ]
           }
