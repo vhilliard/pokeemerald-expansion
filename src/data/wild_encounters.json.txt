@@ -69,6 +69,44 @@ const struct WildPokemon {{ encounter.base_label }}_LandMonsEven[] =
 const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsEvenInfo = { {{encounter.land_mons_evening.encounter_rate}}, {{ encounter.base_label }}_LandMonsEven };
 {% endif %}
 #endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+{% if existsIn(encounter, "land_mons_summer") %}
+const struct WildPokemon {{ encounter.base_label }}_LandMonsSummer[] =
+{
+## for wild_mon in encounter.land_mons_summer.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsSummerInfo = { {{encounter.land_mons_summer.encounter_rate}}, {{ encounter.base_label }}_LandMonsSummer };
+{% endif %}
+{% if existsIn(encounter, "land_mons_autumn") %}
+const struct WildPokemon {{ encounter.base_label }}_LandMonsAutumn[] =
+{
+## for wild_mon in encounter.land_mons_autumn.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsAutumnInfo = { {{encounter.land_mons_autumn.encounter_rate}}, {{ encounter.base_label }}_LandMonsAutumn };
+{% endif %}
+{% if existsIn(encounter, "land_mons_winter") %}
+const struct WildPokemon {{ encounter.base_label }}_LandMonsWinter[] =
+{
+## for wild_mon in encounter.land_mons_winter.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsWinterInfo = { {{encounter.land_mons_winter.encounter_rate}}, {{ encounter.base_label }}_LandMonsWinter };
+{% endif %}
+{% if existsIn(encounter, "land_mons_spring") %}
+const struct WildPokemon {{ encounter.base_label }}_LandMonsSpring[] =
+{
+## for wild_mon in encounter.land_mons_spring.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_LandMonsSpringInfo = { {{encounter.land_mons_spring.encounter_rate}}, {{ encounter.base_label }}_LandMonsSpring };
+{% endif %}
+#endif
 {% if existsIn(encounter, "water_mons") %}
 const struct WildPokemon {{ encounter.base_label }}_WaterMons[] =
 {
@@ -114,6 +152,44 @@ const struct WildPokemon {{ encounter.base_label }}_WaterMonsEven[] =
 ## endfor
 };
 const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsEvenInfo = { {{encounter.water_mons_evening.encounter_rate}}, {{ encounter.base_label }}_WaterMonsEven };
+{% endif %}
+#endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+{% if existsIn(encounter, "water_mons_summer") %}
+const struct WildPokemon {{ encounter.base_label }}_WaterMonsSummer[] =
+{
+## for wild_mon in encounter.water_mons_summer.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsSummerInfo = { {{encounter.water_mons_summer.encounter_rate}}, {{ encounter.base_label }}_WaterMonsSummer };
+{% endif %}
+{% if existsIn(encounter, "water_mons_autumn") %}
+const struct WildPokemon {{ encounter.base_label }}_WaterMonsAutumn[] =
+{
+## for wild_mon in encounter.water_mons_autumn.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsAutumnInfo = { {{encounter.water_mons_autumn.encounter_rate}}, {{ encounter.base_label }}_WaterMonsAutumn };
+{% endif %}
+{% if existsIn(encounter, "water_mons_winter") %}
+const struct WildPokemon {{ encounter.base_label }}_WaterMonsWinter[] =
+{
+## for wild_mon in encounter.water_mons_winter.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsWinterInfo = { {{encounter.water_mons_winter.encounter_rate}}, {{ encounter.base_label }}_WaterMonsWinter };
+{% endif %}
+{% if existsIn(encounter, "water_mons_spring") %}
+const struct WildPokemon {{ encounter.base_label }}_WaterMonsSpring[] =
+{
+## for wild_mon in encounter.water_mons_spring.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+const struct WildPokemonInfo {{ encounter.base_label }}_WaterMonsSpringInfo = { {{encounter.water_mons_spring.encounter_rate}}, {{ encounter.base_label }}_WaterMonsSpring };
 {% endif %}
 #endif
 {% if existsIn(encounter, "rock_smash_mons") %}
@@ -209,6 +285,16 @@ const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
         .rockSmashMonsMornInfo = {% if existsIn(encounter, "rock_smash_mons_morning") %}&{{ encounter.base_label }}_RockSmashMonsMornInfo{% else %}NULL{% endif %},
         .rockSmashMonsEvenInfo = {% if existsIn(encounter, "rock_smash_mons_evening") %}&{{ encounter.base_label }}_RockSmashMonsEvenInfo{% else %}NULL{% endif %},
 #endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+        .landMonsSummerInfo = {% if existsIn(encounter, "land_mons_summer") %}&{{ encounter.base_label }}_LandMonsSummerInfo{% else %}NULL{% endif %},
+        .landMonsAutumnInfo = {% if existsIn(encounter, "land_mons_autumn") %}&{{ encounter.base_label }}_LandMonsAutumnInfo{% else %}NULL{% endif %},
+        .landMonsWinterInfo = {% if existsIn(encounter, "land_mons_winter") %}&{{ encounter.base_label }}_LandMonsWinterInfo{% else %}NULL{% endif %},
+        .landMonsSpringInfo = {% if existsIn(encounter, "land_mons_spring") %}&{{ encounter.base_label }}_LandMonsSpringInfo{% else %}NULL{% endif %},
+        .waterMonsSummerInfo = {% if existsIn(encounter, "water_mons_summer") %}&{{ encounter.base_label }}_WaterMonsSummerInfo{% else %}NULL{% endif %},
+        .waterMonsAutumnInfo = {% if existsIn(encounter, "water_mons_autumn") %}&{{ encounter.base_label }}_WaterMonsAutumnInfo{% else %}NULL{% endif %},
+        .waterMonsWinterInfo = {% if existsIn(encounter, "water_mons_winter") %}&{{ encounter.base_label }}_WaterMonsWinterInfo{% else %}NULL{% endif %},
+        .waterMonsSpringInfo = {% if existsIn(encounter, "water_mons_spring") %}&{{ encounter.base_label }}_WaterMonsSpringInfo{% else %}NULL{% endif %},
+#endif
     },
 ## endfor
     {
@@ -232,6 +318,16 @@ const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
         .rockSmashMonsNiteInfo = NULL,
         .rockSmashMonsMornInfo = NULL,
         .rockSmashMonsEvenInfo = NULL,
+#endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+        .landMonsSummerInfo = NULL,
+        .landMonsAutumnInfo = NULL,
+        .landMonsWinterInfo = NULL,
+        .landMonsSpringInfo = NULL,
+        .waterMonsSummerInfo = NULL,
+        .waterMonsAutumnInfo = NULL,
+        .waterMonsWinterInfo = NULL,
+        .waterMonsSpringInfo = NULL,
 #endif
     },
 };

@@ -90,6 +90,34 @@
           ]
         },
         {
+          "type": "land_mons_summer",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "land_mons_autumn",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "land_mons_winter",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "land_mons_spring",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
           "type": "water_mons",
           "encounter_rates": [
             60,
@@ -140,6 +168,34 @@
           ]
         },
         {
+          "type": "water_mons_summer",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "water_mons_autumn",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "water_mons_winter",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "water_mons_spring",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
           "type": "rock_smash_mons",
           "encounter_rates": [
             60,
@@ -187,6 +243,34 @@
             0,
             0,
             0
+          ]
+        },
+        {
+          "type": "rock_smash_mons_summer",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "rock_smash_mons_autumn",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "rock_smash_mons_winter",
+          "encounter_rates": [
+            50,
+            50
+          ]
+        },
+        {
+          "type": "rock_smash_mons_spring",
+          "encounter_rates": [
+            50,
+            50
           ]
         },
         {
@@ -552,6 +636,66 @@
                 "min_level": 5,
                 "max_level": 5,
                 "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_summer": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEERLING_SUMMER"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_autumn": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEERLING_AUTUMN"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_winter": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEERLING_WINTER"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          },
+          "land_mons_spring": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_DEERLING_SPRING"
               },
               {
                 "min_level": 5,

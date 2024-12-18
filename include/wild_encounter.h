@@ -41,6 +41,17 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *rockSmashMonsMornInfo;
     const struct WildPokemonInfo *rockSmashMonsEvenInfo;
 #endif
+
+#if ENABLE_SEASONAL_ENCOUNTERS
+    const struct WildPokemonInfo *landMonsSummerInfo;
+    const struct WildPokemonInfo *landMonsAutumnInfo;
+    const struct WildPokemonInfo *landMonsWinterInfo;
+    const struct WildPokemonInfo *landMonsSpringInfo;
+    const struct WildPokemonInfo *waterMonsSummerInfo;
+    const struct WildPokemonInfo *waterMonsAutumnInfo;
+    const struct WildPokemonInfo *waterMonsWinterInfo;
+    const struct WildPokemonInfo *waterMonsSpringInfo;
+#endif
 };
 
 extern const struct WildPokemonHeader gWildMonHeaders[];

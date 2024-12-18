@@ -467,6 +467,61 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
     u8 level;
     u16 headerId;
 
+#if ENABLE_SEASONAL_ENCOUNTERS
+    if(GetSeasonMon())
+    {
+        u8 season;
+        const struct WildPokemonInfo *se_wildMonInfo = NULL;
+        u16 se_species;
+        
+        headerId = GetCurrentMapWildMonHeaderId();
+        season = GetCurrentSeason();
+    
+        if (area == WILD_AREA_LAND)
+        {    
+            if (season == SEASONS_SUMMER)
+                se_wildMonInfo = gWildMonHeaders[headerId].landMonsSummerInfo;
+            else if (season == SEASONS_AUTUMN)
+                se_wildMonInfo = gWildMonHeaders[headerId].landMonsAutumnInfo;
+            else if (season == SEASONS_WINTER)
+                se_wildMonInfo = gWildMonHeaders[headerId].landMonsWinterInfo;
+            else if (season == SEASONS_SPRING)
+                se_wildMonInfo = gWildMonHeaders[headerId].landMonsSpringInfo;\
+        }
+        else if (area == WILD_AREA_WATER)
+        {
+            if (season == SEASONS_SUMMER)
+                se_wildMonInfo = gWildMonHeaders[headerId].waterMonsSummerInfo;
+            else if (season == SEASONS_AUTUMN)
+                se_wildMonInfo = gWildMonHeaders[headerId].waterMonsAutumnInfo;
+            else if (season == SEASONS_WINTER)
+                se_wildMonInfo = gWildMonHeaders[headerId].waterMonsWinterInfo;
+            else if (season == SEASONS_SPRING)
+                se_wildMonInfo = gWildMonHeaders[headerId].waterMonsSpringInfo;
+        }
+
+        wildMonIndex = ChooseSeasonMonIndex();
+
+        if(se_wildMonInfo != NULL && wildMonIndex != -1)
+        {
+            se_species = se_wildMonInfo->wildPokemon[wildMonIndex].species;
+
+            level = ChooseWildMonLevel(se_wildMonInfo->wildPokemon, wildMonIndex, area);
+            
+            if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
+                return FALSE;
+            if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
+                return FALSE;
+
+            if(se_species != SPECIES_NONE)
+            {
+                CreateWildMon(se_species, level);
+                return TRUE;
+            }
+        }
+    }
+#endif
+
     switch (area)
     {
     case WILD_AREA_LAND:
