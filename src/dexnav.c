@@ -58,6 +58,8 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
+#include "rtc.h"
+#include "wild_encounter_times.h"
 
 #if DEXNAV_ENABLED
 STATIC_ASSERT(FLAG_SYS_DEXNAV_SEARCH != 0, DexNavSearchFlag);
@@ -1537,6 +1539,116 @@ static u8 GetEncounterLevelFromMapData(u16 species, u8 environment)
                 max = (max > landMonsInfo->wildPokemon[i].maxLevel) ? max : landMonsInfo->wildPokemon[i].maxLevel;
             }
         }
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+        const struct WildPokemonInfo* landMonsDayInfo = gWildMonHeaders[headerId].landMonsDayInfo;
+        const struct WildPokemonInfo* landMonsNiteInfo = gWildMonHeaders[headerId].landMonsNiteInfo;
+        const struct WildPokemonInfo* landMonsMornInfo = gWildMonHeaders[headerId].landMonsMornInfo;
+        const struct WildPokemonInfo* landMonsEvenInfo = gWildMonHeaders[headerId].landMonsEvenInfo;
+
+        if (landMonsDayInfo != NULL)
+        {
+            for(i = 0; i < LAND_WILD_COUNT; i++)
+            {
+                if (landMonsDayInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsDayInfo->wildPokemon[i].minLevel) ? min : landMonsDayInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsDayInfo->wildPokemon[i].maxLevel) ? max : landMonsDayInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsNiteInfo != NULL)
+        {
+            for(i = 0; i < LAND_WILD_COUNT; i++)
+            {
+                if (landMonsNiteInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsNiteInfo->wildPokemon[i].minLevel) ? min : landMonsNiteInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsNiteInfo->wildPokemon[i].maxLevel) ? max : landMonsNiteInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsMornInfo != NULL)
+        {
+            for(i = 0; i < LAND_WILD_COUNT; i++)
+            {
+                if (landMonsMornInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsMornInfo->wildPokemon[i].minLevel) ? min : landMonsMornInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsMornInfo->wildPokemon[i].maxLevel) ? max : landMonsMornInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsEvenInfo != NULL)
+        {
+            for(i = 0; i < LAND_WILD_COUNT; i++)
+            {
+                if (landMonsEvenInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsEvenInfo->wildPokemon[i].minLevel) ? min : landMonsEvenInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsEvenInfo->wildPokemon[i].maxLevel) ? max : landMonsEvenInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+#endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+        const struct WildPokemonInfo* landMonsSummerInfo = gWildMonHeaders[headerId].landMonsSummerInfo;
+        const struct WildPokemonInfo* landMonsAutumnInfo = gWildMonHeaders[headerId].landMonsAutumnInfo;
+        const struct WildPokemonInfo* landMonsWinterInfo = gWildMonHeaders[headerId].landMonsWinterInfo;
+        const struct WildPokemonInfo* landMonsSpringInfo = gWildMonHeaders[headerId].landMonsSpringInfo;
+
+        if (landMonsSummerInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (landMonsSummerInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsSummerInfo->wildPokemon[i].minLevel) ? min : landMonsSummerInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsSummerInfo->wildPokemon[i].maxLevel) ? max : landMonsSummerInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsAutumnInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (landMonsAutumnInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsAutumnInfo->wildPokemon[i].minLevel) ? min : landMonsAutumnInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsAutumnInfo->wildPokemon[i].maxLevel) ? max : landMonsAutumnInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsWinterInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (landMonsWinterInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsWinterInfo->wildPokemon[i].minLevel) ? min : landMonsWinterInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsWinterInfo->wildPokemon[i].maxLevel) ? max : landMonsWinterInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (landMonsSpringInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (landMonsSpringInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < landMonsSpringInfo->wildPokemon[i].minLevel) ? min : landMonsSpringInfo->wildPokemon[i].minLevel;
+                    max = (max > landMonsSpringInfo->wildPokemon[i].maxLevel) ? max : landMonsSpringInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+#endif
+
         break;
     case ENCOUNTER_TYPE_WATER:    //water
         if (waterMonsInfo == NULL)
@@ -1550,6 +1662,116 @@ static u8 GetEncounterLevelFromMapData(u16 species, u8 environment)
                 max = (max > waterMonsInfo->wildPokemon[i].maxLevel) ? max : waterMonsInfo->wildPokemon[i].maxLevel;
             }
         }
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+        const struct WildPokemonInfo* waterMonsDayInfo = gWildMonHeaders[headerId].waterMonsDayInfo;
+        const struct WildPokemonInfo* waterMonsNiteInfo = gWildMonHeaders[headerId].waterMonsNiteInfo;
+        const struct WildPokemonInfo* waterMonsMornInfo = gWildMonHeaders[headerId].waterMonsMornInfo;
+        const struct WildPokemonInfo* waterMonsEvenInfo = gWildMonHeaders[headerId].waterMonsEvenInfo;
+
+        if (waterMonsDayInfo != NULL)
+        {
+            for(i = 0; i < WATER_WILD_COUNT; i++)
+            {
+                if (waterMonsDayInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsDayInfo->wildPokemon[i].minLevel) ? min : waterMonsDayInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsDayInfo->wildPokemon[i].maxLevel) ? max : waterMonsDayInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsNiteInfo != NULL)
+        {
+            for(i = 0; i < WATER_WILD_COUNT; i++)
+            {
+                if (waterMonsNiteInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsNiteInfo->wildPokemon[i].minLevel) ? min : waterMonsNiteInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsNiteInfo->wildPokemon[i].maxLevel) ? max : waterMonsNiteInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsMornInfo != NULL)
+        {
+            for(i = 0; i < WATER_WILD_COUNT; i++)
+            {
+                if (waterMonsMornInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsMornInfo->wildPokemon[i].minLevel) ? min : waterMonsMornInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsMornInfo->wildPokemon[i].maxLevel) ? max : waterMonsMornInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsEvenInfo != NULL)
+        {
+            for(i = 0; i < WATER_WILD_COUNT; i++)
+            {
+                if (waterMonsEvenInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsEvenInfo->wildPokemon[i].minLevel) ? min : waterMonsEvenInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsEvenInfo->wildPokemon[i].maxLevel) ? max : waterMonsEvenInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+#endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+        const struct WildPokemonInfo* waterMonsSummerInfo = gWildMonHeaders[headerId].waterMonsSummerInfo;
+        const struct WildPokemonInfo* waterMonsAutumnInfo = gWildMonHeaders[headerId].waterMonsAutumnInfo;
+        const struct WildPokemonInfo* waterMonsWinterInfo = gWildMonHeaders[headerId].waterMonsWinterInfo;
+        const struct WildPokemonInfo* waterMonsSpringInfo = gWildMonHeaders[headerId].waterMonsSpringInfo;
+
+        if (waterMonsSummerInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (waterMonsSummerInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsSummerInfo->wildPokemon[i].minLevel) ? min : waterMonsSummerInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsSummerInfo->wildPokemon[i].maxLevel) ? max : waterMonsSummerInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsAutumnInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (waterMonsAutumnInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsAutumnInfo->wildPokemon[i].minLevel) ? min : waterMonsAutumnInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsAutumnInfo->wildPokemon[i].maxLevel) ? max : waterMonsAutumnInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsWinterInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (waterMonsWinterInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsWinterInfo->wildPokemon[i].minLevel) ? min : waterMonsWinterInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsWinterInfo->wildPokemon[i].maxLevel) ? max : waterMonsWinterInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+
+        if (waterMonsSpringInfo != NULL)
+        {
+            for(i = 0; i < SEASON_WILD_COUNT; i++)
+            {
+                if (waterMonsSpringInfo->wildPokemon[i].species == species)
+                {
+                    min = (min < waterMonsSpringInfo->wildPokemon[i].minLevel) ? min : waterMonsSpringInfo->wildPokemon[i].minLevel;
+                    max = (max > waterMonsSpringInfo->wildPokemon[i].maxLevel) ? max : waterMonsSpringInfo->wildPokemon[i].maxLevel;
+                }
+            }
+        }
+#endif
+
         break;
     case ENCOUNTER_TYPE_HIDDEN:
         if (hiddenMonsInfo == NULL)
@@ -1893,24 +2115,37 @@ static void DexNavFadeAndExit(void)
     SetMainCallback2(DexNav_MainCB);
 }
 
-static bool8 SpeciesInArray(u16 species, u8 section)
+static bool8 SpeciesInArray(u16 species, u8 section, bool8 normaliseSpecies)
 {
     u32 i;
     u16 dexNum = SpeciesToNationalPokedexNum(species);
+    u16 dexSpecies;
     
     switch (section)
     {
     case 0: //land
         for (i = 0; i < LAND_WILD_COUNT; i++)
         {
-            if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->landSpecies[i]) == dexNum)
+            if (normaliseSpecies)
+            if (SpeciesToNationalPokedexNum(species) == dexNum)
+                return TRUE;
+
+            dexSpecies = sDexNavUiDataPtr->landSpecies[i];
+
+            if (species == dexSpecies)
                 return TRUE;
         }
         break;
     case 1: //water
         for (i = 0; i < WATER_WILD_COUNT; i++)
         {
+            if (normaliseSpecies)
             if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->waterSpecies[i]) == dexNum)
+                return TRUE;
+
+            dexSpecies = sDexNavUiDataPtr->waterSpecies[i];
+
+            if (species == dexSpecies)
                 return TRUE;
         }
         break;
@@ -1918,6 +2153,11 @@ static bool8 SpeciesInArray(u16 species, u8 section)
         for (i = 0; i < HIDDEN_WILD_COUNT; i++)
         {
             if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->hiddenSpecies[i]) == dexNum)
+                return TRUE;
+
+            dexSpecies = sDexNavUiDataPtr->landSpecies[i];
+
+            if (species == dexSpecies)
                 return TRUE;
         }
         break;
@@ -1952,10 +2192,104 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < LAND_WILD_COUNT; i++)
         {
             species = landMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 0))
-                sDexNavUiDataPtr->landSpecies[grassIndex++] = landMonsInfo->wildPokemon[i].species;
+            if (species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
         }
     }
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+    const struct WildPokemonInfo* landMonsDayInfo = gWildMonHeaders[headerId].landMonsDayInfo;
+    const struct WildPokemonInfo* landMonsNiteInfo = gWildMonHeaders[headerId].landMonsNiteInfo;
+    const struct WildPokemonInfo* landMonsMornInfo = gWildMonHeaders[headerId].landMonsMornInfo;
+    const struct WildPokemonInfo* landMonsEvenInfo = gWildMonHeaders[headerId].landMonsEvenInfo;
+
+    if (landMonsDayInfo != NULL)
+    {
+        for(i = 0; i < LAND_WILD_COUNT; i++)
+        {
+            species = landMonsDayInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsNiteInfo != NULL)
+    {
+        for(i = 0; i < LAND_WILD_COUNT; i++)
+        {
+            species = landMonsNiteInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsMornInfo != NULL)
+    {
+        for(i = 0; i < LAND_WILD_COUNT; i++)
+        {
+            species = landMonsMornInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsEvenInfo != NULL)
+    {
+        for(i = 0; i < LAND_WILD_COUNT; i++)
+        {
+            species = landMonsEvenInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+#endif
+
+#if ENABLE_SEASONAL_ENCOUNTERS
+    const struct WildPokemonInfo* landMonsSummerInfo = gWildMonHeaders[headerId].landMonsSummerInfo;
+    const struct WildPokemonInfo* landMonsAutumnInfo = gWildMonHeaders[headerId].landMonsAutumnInfo;
+    const struct WildPokemonInfo* landMonsWinterInfo = gWildMonHeaders[headerId].landMonsWinterInfo;
+    const struct WildPokemonInfo* landMonsSpringInfo = gWildMonHeaders[headerId].landMonsSpringInfo;
+
+    if (landMonsSummerInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = landMonsSummerInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsAutumnInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = landMonsAutumnInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsWinterInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = landMonsWinterInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (landMonsSpringInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = landMonsSpringInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
+        }
+    }
+#endif
 
     // water mons
     if (waterMonsInfo != NULL && waterMonsInfo->encounterRate != 0)
@@ -1963,10 +2297,104 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < WATER_WILD_COUNT; i++)
         {
             species = waterMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 1))
-                sDexNavUiDataPtr->waterSpecies[waterIndex++] = waterMonsInfo->wildPokemon[i].species;
+            if (species != SPECIES_NONE && !SpeciesInArray(species, 1, FALSE))
+                sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;
         }
     }
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+    const struct WildPokemonInfo* waterMonsDayInfo = gWildMonHeaders[headerId].waterMonsDayInfo;
+    const struct WildPokemonInfo* waterMonsNiteInfo = gWildMonHeaders[headerId].waterMonsNiteInfo;
+    const struct WildPokemonInfo* waterMonsMornInfo = gWildMonHeaders[headerId].waterMonsMornInfo;
+    const struct WildPokemonInfo* waterMonsEvenInfo = gWildMonHeaders[headerId].waterMonsEvenInfo;
+
+    if (waterMonsDayInfo != NULL)
+    {
+        for(i = 0; i < WATER_WILD_COUNT; i++)
+        {
+            species = waterMonsDayInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 1, FALSE))
+                sDexNavUiDataPtr->waterSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (waterMonsNiteInfo != NULL)
+    {
+        for(i = 0; i < WATER_WILD_COUNT; i++)
+        {
+            species = waterMonsNiteInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 1, FALSE))
+                sDexNavUiDataPtr->waterSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (waterMonsMornInfo != NULL)
+    {
+        for(i = 0; i < WATER_WILD_COUNT; i++)
+        {
+            species = waterMonsMornInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 1, FALSE))
+                sDexNavUiDataPtr->waterSpecies[grassIndex++] = species;
+        }
+    }
+
+    if (waterMonsEvenInfo != NULL)
+    {
+        for(i = 0; i < WATER_WILD_COUNT; i++)
+        {
+            species = waterMonsEvenInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 1, FALSE))
+                sDexNavUiDataPtr->waterSpecies[grassIndex++] = species;
+        }
+    }
+#endif
+
+#if ENABLE_SEASONAL_ENCOUNTERS
+    const struct WildPokemonInfo* waterMonsSummerInfo = gWildMonHeaders[headerId].waterMonsSummerInfo;
+    const struct WildPokemonInfo* waterMonsAutumnInfo = gWildMonHeaders[headerId].waterMonsAutumnInfo;
+    const struct WildPokemonInfo* waterMonsWinterInfo = gWildMonHeaders[headerId].waterMonsWinterInfo;
+    const struct WildPokemonInfo* waterMonsSpringInfo = gWildMonHeaders[headerId].waterMonsSpringInfo;
+
+    if (waterMonsSummerInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = waterMonsSummerInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;
+        }
+    }
+
+    if (waterMonsAutumnInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = waterMonsAutumnInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;
+        }
+    }
+
+    if (waterMonsWinterInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = waterMonsWinterInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;
+        }
+    }
+
+    if (waterMonsSpringInfo != NULL)
+    {
+        for(i = 0; i < SEASON_WILD_COUNT; i++)
+        {
+            species = waterMonsSpringInfo->wildPokemon[i].species;
+            if(species != SPECIES_NONE && !SpeciesInArray(species, 0, FALSE))
+                sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;
+        }
+    }
+#endif
     
     // hidden mons
     if (hiddenMonsInfo != NULL) // no encounter rate check since 0 means land, 1 means water encounters
@@ -1974,8 +2402,8 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < HIDDEN_WILD_COUNT; i++)
         {
             species = hiddenMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 2))
-                sDexNavUiDataPtr->hiddenSpecies[hiddenIndex++] = hiddenMonsInfo->wildPokemon[i].species;
+            if (species != SPECIES_NONE && !SpeciesInArray(species, 2, FALSE))
+                sDexNavUiDataPtr->hiddenSpecies[hiddenIndex++] = species;
         }
     }
 }
@@ -2515,6 +2943,14 @@ bool8 TryFindHiddenPokemon(void)
         u8 taskId;
         const struct WildPokemonInfo* hiddenMonsInfo = gWildMonHeaders[headerId].hiddenMonsInfo;
         bool8 isHiddenMon = FALSE;
+
+        u8 nonHiddenMonIndex;
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+        u8 time = GetTimeOfDay();
+#endif
+#if ENABLE_SEASONAL_ENCOUNTERS
+        u8 season = GetCurrentSeason();
+#endif
         
         // while you can still technically find hidden pokemon if there are not hidden-only pokemon on a map,
         // this prevents any potential lagging on maps you dont want hidden pokemon to appear on
@@ -2538,7 +2974,44 @@ bool8 TryFindHiddenPokemon(void)
             }
             else
             {
-                species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+                nonHiddenMonIndex = ChooseWildMonIndex_Land();
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+                if (time == TIME_DAY && gWildMonHeaders[headerId].landMonsDayInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsDayInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (time == TIME_NIGHT && gWildMonHeaders[headerId].landMonsNiteInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsNiteInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (time == TIME_MORNING && gWildMonHeaders[headerId].landMonsMornInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsMornInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (time == TIME_EVENING && gWildMonHeaders[headerId].landMonsEvenInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsEvenInfo->wildPokemon[nonHiddenMonIndex].species;
+                else
+                    species = SPECIES_NONE;
+
+                if(species == SPECIES_NONE)
+                    species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#else
+                species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#endif
+
+#if ENABLE_SEASONAL_ENCOUNTERS
+                if (season == SEASONS_SUMMER && gWildMonHeaders[headerId].landMonsSummerInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsSummerInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_AUTUMN && gWildMonHeaders[headerId].landMonsAutumnInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsAutumnInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_WINTER && gWildMonHeaders[headerId].landMonsWinterInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsWinterInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_SPRING && gWildMonHeaders[headerId].landMonsSpringInfo != NULL)
+                    species = gWildMonHeaders[headerId].landMonsSpringInfo->wildPokemon[nonHiddenMonIndex].species;
+                else
+                    species = SPECIES_NONE;
+
+                if(species == SPECIES_NONE)
+                    species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#else
+                species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#endif
+
                 environment = ENCOUNTER_TYPE_LAND;
             }
             break;
@@ -2556,7 +3029,44 @@ bool8 TryFindHiddenPokemon(void)
                 }
                 else
                 {
-                    species = gWildMonHeaders[headerId].waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+                    nonHiddenMonIndex = ChooseWildMonIndex_WaterRock();
+
+#if ENABLE_DAY_NIGHT_ENCOUNTERS
+                    if (time == TIME_DAY && gWildMonHeaders[headerId].waterMonsDayInfo != NULL)
+                        species = gWildMonHeaders[headerId].waterMonsDayInfo->wildPokemon[nonHiddenMonIndex].species;
+                    else if (time == TIME_NIGHT && gWildMonHeaders[headerId].waterMonsNiteInfo != NULL)
+                        species = gWildMonHeaders[headerId].waterMonsNiteInfo->wildPokemon[nonHiddenMonIndex].species;
+                    else if (time == TIME_MORNING && gWildMonHeaders[headerId].waterMonsMornInfo != NULL)
+                        species = gWildMonHeaders[headerId].waterMonsMornInfo->wildPokemon[nonHiddenMonIndex].species;
+                    else if (time == TIME_EVENING && gWildMonHeaders[headerId].waterMonsEvenInfo != NULL)
+                        species = gWildMonHeaders[headerId].waterMonsEvenInfo->wildPokemon[nonHiddenMonIndex].species;
+                    else
+                        species = SPECIES_NONE;
+
+                    if(species == SPECIES_NONE)
+                        species = gWildMonHeaders[headerId].waterMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#else
+                    species = gWildMonHeaders[headerId].waterMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#endif
+
+#if ENABLE_SEASONAL_ENCOUNTERS
+                if (season == SEASONS_SUMMER && gWildMonHeaders[headerId].waterMonsSummerInfo != NULL)
+                    species = gWildMonHeaders[headerId].waterMonsSummerInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_AUTUMN && gWildMonHeaders[headerId].waterMonsAutumnInfo != NULL)
+                    species = gWildMonHeaders[headerId].waterMonsAutumnInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_WINTER && gWildMonHeaders[headerId].waterMonsWinterInfo != NULL)
+                    species = gWildMonHeaders[headerId].waterMonsWinterInfo->wildPokemon[nonHiddenMonIndex].species;
+                else if (season == SEASONS_SPRING && gWildMonHeaders[headerId].waterMonsSpringInfo != NULL)
+                    species = gWildMonHeaders[headerId].waterMonsSpringInfo->wildPokemon[nonHiddenMonIndex].species;
+                else
+                    species = SPECIES_NONE;
+
+                if(species == SPECIES_NONE)
+                    species = gWildMonHeaders[headerId].waterMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#else
+                species = gWildMonHeaders[headerId].waterMonsInfo->wildPokemon[nonHiddenMonIndex].species;
+#endif
+                    
                     environment = ENCOUNTER_TYPE_WATER;
 
                 }
