@@ -1946,113 +1946,69 @@ static void CreateNoDataIcon(s16 x, s16 y)
     CreateSprite(&sNoDataIconTemplate, x, y, 0);
 }
 
-static bool8 CapturedAllLandMons(u16 headerId)
+static bool8 CapturedAllLandMons()
 {
     u16 i, species;
-    int count = 0;
-    const struct WildPokemonInfo* landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
         
-    if (landMonsInfo != NULL)
-    {        
-        for (i = 0; i < LAND_WILD_COUNT; ++i)
-        {
-            species = landMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
-            {
-                if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-                    break;
-                
-                count++;
-            }
-        }
-
-        if (i >= LAND_WILD_COUNT && count > 0) //All land mons caught
-            return TRUE;
-    }
-    else
+    for (i = 0; i < LAND_WILD_COUNT; i++)
     {
-        return TRUE;    //technically, no mon data means you caught them all
+        species = sDexNavUiDataPtr->landSpecies[i];
+        if (species != SPECIES_NONE)
+        {
+            if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+                return FALSE;
+        }
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 //Checks if all Pokemon that can be encountered while surfing have been capture
-static bool8 CapturedAllWaterMons(u16 headerId)
+static bool8 CapturedAllWaterMons()
 {
-    u32 i;
-    u16 species;
-    u8 count = 0;
-    const struct WildPokemonInfo* waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+    u16 i, species;
 
-    if (waterMonsInfo != NULL)
+    for (i = 0; i < WATER_WILD_COUNT; i++)
     {
-        for (i = 0; i < WATER_WILD_COUNT; ++i)
+        species = sDexNavUiDataPtr->waterSpecies[i];
+        if (species != SPECIES_NONE)
         {
-            species = waterMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
-            {
-                count++;
-                if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-                    break;
-            }
+            if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+                return FALSE;
         }
-
-        if (i >= WATER_WILD_COUNT && count > 0)
-            return TRUE;
-    }
-    else
-    {
-        return TRUE;    //technically, no mon data means you caught them all
     }
 
-    return FALSE;
+    return TRUE;
 }
 
-static bool8 CapturedAllHiddenMons(u16 headerId)
+static bool8 CapturedAllHiddenMons()
 {
-    u32 i;
-    u16 species;
-    u8 count = 0;
-    const struct WildPokemonInfo* hiddenMonsInfo = gWildMonHeaders[headerId].hiddenMonsInfo;
+    u16 i, species;
     
-    if (hiddenMonsInfo != NULL)
+    for (i = 0; i < HIDDEN_WILD_COUNT; i++)
     {
-        for (i = 0; i < HIDDEN_WILD_COUNT; ++i)
+        species = sDexNavUiDataPtr->hiddenSpecies[i];
+        if (species != SPECIES_NONE)
         {
-            species = hiddenMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
-            {
-                count++;
-                if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-                    break;
-            }
+            if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+                return FALSE;
         }
-
-        if (i >= HIDDEN_WILD_COUNT && count > 0)
-            return TRUE;
-    }
-    else
-    {
-        return TRUE;    //technically, no mon data means you caught them all
     }
 
-    return FALSE;
+    return TRUE;
 }
 
 static void DexNavLoadCapturedAllSymbols(void)
 {
-    u16 headerId = GetCurrentMapWildMonHeaderId();
-    
     LoadCompressedSpriteSheetUsingHeap(&sCapturedAllPokemonSpriteSheet);
 
-    if (CapturedAllLandMons(headerId))
+    if (CapturedAllLandMons())
         CreateSprite(&sCaptureAllMonsSpriteTemplate, 152, 58, 0);
 
-    if (CapturedAllWaterMons(headerId))
+    if (CapturedAllWaterMons())
         CreateSprite(&sCaptureAllMonsSpriteTemplate, 139, 17, 0);
     
-    if (CapturedAllHiddenMons(headerId))
+    if (CapturedAllHiddenMons())
         CreateSprite(&sCaptureAllMonsSpriteTemplate, 114, 123, 0);
 }
 
